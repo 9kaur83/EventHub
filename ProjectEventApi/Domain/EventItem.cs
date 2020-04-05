@@ -13,7 +13,7 @@ namespace ProjectEventApi.Domain
         public double Fees { get; set; }
         public string PictureUrl { get; set; }
         public int EventTypeId { get; set; }
-        public string EventLocationName { get; set; }
+        public int EventLocationZipcode { get; set; }
         public virtual EventType EventType { get; set; }
         public virtual EventLocation EventLocation { get; set; }
 
