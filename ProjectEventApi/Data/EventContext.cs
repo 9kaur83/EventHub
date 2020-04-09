@@ -10,7 +10,7 @@ namespace ProjectEventApi.Data
     public class EventContext:DbContext
     {
        public EventContext(DbContextOptions options)
-            :base(options)
+            : base(options)
         {  }
 
         public DbSet<EventLocation> EventLocations { get; set; }
@@ -23,10 +23,13 @@ namespace ProjectEventApi.Data
             {
                 e.ToTable("EventLocations");
 
-                e.Property(b => b.Zipcode);
-                e.HasKey(b => b.Zipcode);
+                e.Property(b => b.Id)
+                   .IsRequired()
+                   .UseHiLo("Event_location_hilo");
 
-                    
+                e.Property(b => b.Zipcode)
+                     .IsRequired();
+
                 e.Property(b => b.Name)
                     .IsRequired()
                     .HasMaxLength(100);
@@ -53,7 +56,13 @@ namespace ProjectEventApi.Data
                     .IsRequired()
                     .HasMaxLength(100);
 
-                e.Property(c => c.Fees)
+                e.Property(c => c.Venue)
+                    .IsRequired()
+                    .HasMaxLength(100);
+               
+
+                e.Property(c => c.TicketPrice)
+                    .HasColumnType("decimal(5,2)")
                     .IsRequired();
 
                 e.HasOne(c => c.EventType)
@@ -62,15 +71,9 @@ namespace ProjectEventApi.Data
 
                 e.HasOne(c => c.EventLocation)
                     .WithMany()
-                    .HasForeignKey(c => c.EventLocationZipcode);
+                    .HasForeignKey(c => c.EventLocationId);
 
              });
         }
-
-
-
-
-
-
     }
 }

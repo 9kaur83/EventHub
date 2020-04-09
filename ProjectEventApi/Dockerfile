@@ -6,10 +6,8 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
-COPY ["ProjectEventApi/ProjectEventApi.csproj", "ProjectEventApi/"]
-RUN dotnet restore "ProjectEventApi/ProjectEventApi.csproj"
 COPY . .
-WORKDIR "/src/ProjectEventApi"
+RUN dotnet restore ProjectEventApi.csproj"
 RUN dotnet build "ProjectEventApi.csproj" -c Release -o /app/build
 
 FROM build AS publish
