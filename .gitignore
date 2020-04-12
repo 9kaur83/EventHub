@@ -14,3 +14,5 @@ ProjectEventApi/obj/Debug/netcoreapp3.1/ProjectEventApi.assets.cache
 /ProjectEventApi/obj
 /ProjectEventApi/bin/Debug/netcoreapp3.1
 /.vs/Eventhub
+/bin/Debug
+/obj

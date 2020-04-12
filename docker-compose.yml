@@ -1,0 +1,40 @@
+version: '3.4'
+
+networks:
+   frontend:
+   backend:
+
+services:
+   event:
+      image: eventhubs/eventapi
+      build:
+         context: .\ProjectEventApi
+         dockerfile: Dockerfile
+      environment:
+         DatabaseServer: mssqlserver
+         DatabaseName: EventDb
+         DatabaseUser: sa
+         DatabasePassword: ProductApi(83)
+         ExternalEventBaseUrl: http://localhost:6900
+      ports: 
+         - "6900:80"
+      container_name: eventhubseventapi
+      networks:
+         - backend
+         - frontend
+      depends_on:
+         - mssqlserver
+
+   mssqlserver:
+      image: "microsoft/mssql-server-linux:latest"
+      environment:
+         ACCEPT_EULA: Y
+         SA_PASSWORD: ProductApi(83)
+      ports:
+         - "1449:1433"
+      container_name: eventhubssqlserver
+      networks:
+         - backend
+         
+
+  
