@@ -9,9 +9,9 @@ namespace ProjectEventApi.Domain
         public string Description { get; set; }
 
         public string Venue { get; set; }
-        public DateTime Start_dateTime { get; set; }
-        public DateTime End_dateTime { get; set; }
-        public decimal TicketPrice { get; set; }
+        public DateTime StartTime { get; set; }
+        public DateTime EndTime { get; set; }
+        public decimal Price { get; set; }
         public string PictureUrl { get; set; }
         public int EventTypeId { get; set; }
         public int EventLocationId { get; set; }
