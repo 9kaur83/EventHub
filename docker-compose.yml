@@ -6,7 +6,7 @@ networks:
 
 services:
    event:
-      image: eventhubs/eventapi
+      image: events/eventapi
       build:
          context: .\ProjectEventApi
          dockerfile: Dockerfile
@@ -18,7 +18,7 @@ services:
          ExternalEventBaseUrl: http://localhost:6900
       ports: 
          - "6900:80"
-      container_name: eventhubseventapi
+      container_name: eventseventapi
       networks:
          - backend
          - frontend
@@ -32,7 +32,7 @@ services:
          SA_PASSWORD: ProductApi(83)
       ports:
          - "1449:1433"
-      container_name: eventhubssqlserver
+      container_name: eventssqlserver
       networks:
          - backend
          

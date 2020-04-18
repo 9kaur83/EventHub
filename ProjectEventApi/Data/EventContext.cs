@@ -61,7 +61,7 @@ namespace ProjectEventApi.Data
                     .HasMaxLength(100);
                
 
-                e.Property(c => c.TicketPrice)
+                e.Property(c => c.Price)
                     .HasColumnType("decimal(5,2)")
                     .IsRequired();
 
