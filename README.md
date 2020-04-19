@@ -2,9 +2,9 @@
  Assignment3a
 
 
-[Assignment Video]
+YoTube Link Assignment3a [https://youtu.be/yY8qPEazIzg]
 
-
+## This is a service for EventBrite website.
 
 ## How to set up the project
 * Clone code
@@ -20,7 +20,7 @@
 * Edit each ticket's custom settings.
 * Optional: Reorder/Rearrange your tickets.
 * Save your changes.
-*
+
 
 ## Project object 
 * Building API
