@@ -27,94 +27,88 @@ namespace ProjectEventApi.Controllers
         [HttpGet]
         [Route("[action]")]
         public async Task<IActionResult> Items(
-           // [FromQuery]string location = "",
-            //[FromQuery]int eventTypeId = -1,
             [FromQuery]int pageIndex = 0,
-            [FromQuery]int pageSize = 2)
+            [FromQuery]int pageSize = 6)
         {
-            
-            /* code for following cases:
-                - Both location and eventTypeId input provided.
-                - Or only location provided
-                - Or only eventTypeId provided
-                - or Both location and eventTypeId not provided.
-           */
-           /*
-            List<EventItem> items;
-            List<EventItem> totalItems;
-
-            if (string.IsNullOrEmpty(location) && eventTypeId == -1)
-            {
-                totalItems = await _context.EventItems.ToListAsync();
-            }
-            else if (string.IsNullOrEmpty(location) && eventTypeId != -1)
-            {
-                totalItems = await _context.EventItems
-                         .Where(i => i.EventTypeId == eventTypeId).ToListAsync();
-            }
-            else if (!string.IsNullOrEmpty(location) && eventTypeId == -1)
-            {
-                totalItems = await _context.EventItems
-                          .Where(i => i.Location == location).ToListAsync();
-            }
-            else
-            {
-                totalItems = await _context.EventItems
-                         .Where(i => i.Location == location && i.EventTypeId == eventTypeId)
-                          .ToListAsync();
-            }
-
-            items = totalItems
-                          .Skip(pageIndex * pageSize)
-                           .Take(pageSize).ToList();
-
-            var itemsCount = totalItems.Count();
-            */
-            
             var itemsCount = await _context.EventItems.LongCountAsync();
+            var items = await _context.EventItems
+                .OrderBy(c => c.Name)
+                .Skip(pageIndex * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
 
-           var items = await _context.EventItems.Skip(pageIndex * pageSize)
-                               .Take(pageSize)
-                               .ToListAsync();
-            
-
-            items = ChangePictureUrl(items);
+            items = changePictureUrl(items);
 
             var model = new PaginatedItemViewModel<EventItem>
             {
-                pageIndex = pageIndex,
-                pageSize = pageSize,
-                count = itemsCount,
+                PageIndex = pageIndex,
+                PageSize = pageSize,
+                Count = itemsCount,
                 Data = items
             };
             return Ok(model);
         }
 
-        /*
-
-        //This service looks for particular event details
         [HttpGet]
-        [Route("item")]
-        public async Task<IActionResult> Item(
-            [FromQuery]int eventId)
+        [Route("[action]/type/{eventTypeId}/location/{eventLocationId}")]
+        public async Task<IActionResult> Items(
+            int? eventTypeId,
+            int? eventLocationId,
+            [FromQuery]int pageIndex = 0,
+            [FromQuery]int pageSize = 6)
         {
-            var item = await _context.EventItems
-                         .Where(i => i.Id == eventId)
-                          .ToListAsync();
+            var root = (IQueryable<EventItem>)_context.EventItems;
+            if (eventTypeId.HasValue)
+            {
+                root = root.Where(c => c.EventTypeId == eventTypeId);
+            }
+            if (eventLocationId.HasValue)
+            {
+                root = root.Where(c => c.EventLocationId == eventLocationId);
+            }
 
-            var items = ChangePictureUrl(item);
-            return Ok(items[0]);
+            var itemsCount = await root.LongCountAsync();
+            var items = await root
+                .OrderBy(c => c.Name)
+                .Skip(pageIndex * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            items = changePictureUrl(items);
+
+            var model = new PaginatedItemViewModel<EventItem>
+            {
+                PageIndex = pageIndex,
+                PageSize = pageSize,
+                Count = itemsCount,
+                Data = items
+            };
+            return Ok(model);
         }
-        */
 
-        private List<EventItem> ChangePictureUrl(List<EventItem> items)
+        private List<EventItem> changePictureUrl(List<EventItem> items)
+
         {
             items.ForEach(
-                e => e.PictureUrl =
-                e.PictureUrl.Replace("http://externaleventbaseurltobereplaced",
-                     _config["ExternalEventBaseUrl"])
-                 );
+                c => c.PictureUrl = c.PictureUrl.Replace("http://externaleventbaseurltobereplaced", _config["ExternalEventBaseUrl"]));
             return items;
+
+        }
+
+        [HttpGet]
+        [Route("[action]")]
+        public async Task<IActionResult> EventTypes()
+        {
+            var items = await _context.EventTypes.ToListAsync();
+            return Ok(items);
+        }
+
+        [HttpGet]
+        [Route("[action]")]
+        public async Task<IActionResult> EventLocations()
+        {
+            var items = await _context.EventLocations.ToListAsync();
+            return Ok(items);
         }
     }
 }

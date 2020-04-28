@@ -8,9 +8,9 @@ namespace ProjectEventApi.ViewModel
     public class PaginatedItemViewModel<TEntity>
         where TEntity : class
     {
-        public int pageSize { get; set; }
-        public int pageIndex { get; set; }
-        public long count { get; set; }
+        public int PageSize { get; set; }
+        public int PageIndex { get; set; }
+        public long Count { get; set; }
         public IEnumerable<TEntity> Data { get; set; }
     }
 }

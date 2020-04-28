@@ -36,5 +36,19 @@ services:
       networks:
          - backend
          
-
+   webmvc:
+     build:
+       context: .\webmvc
+       dockerfile: Dockerfile
+     image: hubs/webmvc
+     container_name: eventhub
+     environment:
+       CatalogUrl: http://event
+       ASPNETCORE_ENVIRONMENT: Development
+     ports:
+       - "5310:80"
+     networks:
+       - frontend
+     depends_on:
+       - event  
   
