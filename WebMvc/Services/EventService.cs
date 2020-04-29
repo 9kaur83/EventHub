@@ -47,8 +47,8 @@ namespace WebMVC.Services
                 items.Add(
                     new SelectListItem
                     {
-                        Value = location.Value<string>("id"),
-                        Text = location.Value<string>("Zipcode")
+                        Value = location.Value<int>("id").ToString(),
+                        Text = location.Value<string>("zipcode")
                     }
                     );
             }

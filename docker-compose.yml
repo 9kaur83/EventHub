@@ -43,7 +43,7 @@ services:
      image: hubs/webmvc
      container_name: eventhub
      environment:
-       CatalogUrl: http://event
+       EventUrl: http://event
        ASPNETCORE_ENVIRONMENT: Development
      ports:
        - "5310:80"

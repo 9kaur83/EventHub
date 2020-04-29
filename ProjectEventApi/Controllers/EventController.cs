@@ -36,7 +36,7 @@ namespace ProjectEventApi.Controllers
                 .Skip(pageIndex * pageSize)
                 .Take(pageSize)
                 .ToListAsync();
-
+            
             items = changePictureUrl(items);
 
             var model = new PaginatedItemViewModel<EventItem>

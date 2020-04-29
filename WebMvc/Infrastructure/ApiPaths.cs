@@ -19,7 +19,7 @@ namespace WebMVC.Infrastructure
                     filterQs = $"/type/{typeQs}/location/{locationQs}";
                 }
             
-                return $"{baseUri}item{filterQs}?PageIndex={page}&pageSize={take}";
+                return $"{baseUri}items{filterQs}?pageIndex={page}&pageSize={take}";
             }
 
             public static string GetAllTypes(string baseUri)
@@ -29,7 +29,7 @@ namespace WebMVC.Infrastructure
 
             public static string GetAllLocations(string baseUri)
             {
-                return $"{baseUri}EventLocation";
+                return $"{baseUri}EventLocations";
             }
         }
 
