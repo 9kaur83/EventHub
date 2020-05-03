@@ -33,6 +33,17 @@ namespace ProjectEventApi
             var password = Configuration["DatabasePassword"];
             var connectionString = $"Server={server};Database={database};User Id={user};Password={password}";
             services.AddDbContext<EventContext>(options => options.UseSqlServer(connectionString));
+
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("V1", new Microsoft.OpenApi.Models.OpenApiInfo
+                {
+                    Title = "EventHub - Product Event API",
+                    Version = "v1",
+                    Description = "Product event microservice "
+                });
+            });
+              
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,7 +57,11 @@ namespace ProjectEventApi
             app.UseRouting();
 
             app.UseAuthorization();
-
+            app.UseSwagger()
+                .UseSwaggerUI(e =>
+                {
+                    e.SwaggerEndpoint($"/swagger/V1/swagger.json", "ProductEventAPI V1");
+                });
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

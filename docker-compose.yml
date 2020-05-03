@@ -36,19 +36,47 @@ services:
       networks:
          - backend
          
+   tokenserver:
+      build:
+        context: .\TokenServiceApi
+        dockerfile: Dockerfile
+      image: events/tokenapi
+      logging:
+        driver: "json-file"
+        options:
+          max-size: "200k"
+          max-file: "10"
+      environment:
+        DatabaseServer: mssqlserver
+        DatabaseName: EventDb
+        DatabaseUser: sa
+        DatabasePassword: ProductApi(83)
+        ASPNETCORE_ENVIRONMENT: Development
+        MvcClient: http://localhost:5310
+      ports:
+        - "6700:80"
+      container_name: tokenserviceapi
+      networks:
+        - backend
+        - frontend
+      depends_on:
+        - mssqlserver
+
    webmvc:
-     build:
-       context: .\webmvc
-       dockerfile: Dockerfile
-     image: hubs/webmvc
-     container_name: eventhub
-     environment:
-       EventUrl: http://event
-       ASPNETCORE_ENVIRONMENT: Development
-     ports:
-       - "5310:80"
-     networks:
-       - frontend
-     depends_on:
-       - event  
+      build:
+        context: .\webmvc
+        dockerfile: Dockerfile
+      image: events/webmvc
+      container_name: eventhub
+      environment:
+        ASPNETCORE_ENVIRONMENT: Development
+        EventUrl: http://event
+        IdentityUrl: http://192.168.1.6:6700
+        CallBackUrl: http://localhost:5310
+      ports:
+        - "5310:80"
+      networks:
+        - frontend
+      depends_on:
+        - event  
   

@@ -21,7 +21,6 @@ namespace ProjectEventApi.Controllers
         public EventController(EventContext context,IConfiguration config)
         {
             _context = context;
-            //EventSeed.Seed(context);
             _config = config;
         }
 

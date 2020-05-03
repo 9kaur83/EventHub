@@ -12,7 +12,7 @@
     </ol>
     <div class="carousel-inner" role="listbox">
         <div class="item active">
-            <img src="~/images/banner-26.jpg"  width="336" height="336" alt="ASP.NET" class="img-responsive" />
+            <img src="~/images/banner-26.jpg"  height="500" width="500" alt="ASP.NET" class="img-responsive" />
             <div class="carousel-caption" role="option">
                 <p>
                     Bollywood dance is the dance-form used in the Indian films.
@@ -20,7 +20,7 @@
             </div>
         </div>
         <div class="item">
-            <img src="~/images/banner-27.png" width="336" height="336" alt="Visual Studio" class="img-responsive" />
+            <img src="~/images/banner-27.png"  height="500" width="500" alt="Visual Studio" class="img-responsive" />
             <div class="carousel-caption" role="option">
                 <p>
                     Indian festival of color!
@@ -28,7 +28,7 @@
             </div>
         </div>
         <div class="item">
-            <img src="~/images/banner-28.jpg" width="336" height="336" alt="Package Management" class="img-responsive" />
+            <img src="~/images/banner-28.jpg"  height="500" width="500"  alt="Package Management" class="img-responsive" />
             <div class="carousel-caption" role="option">
                 <p>
                     Pottery is made by forming a ceramic (often clay) body into objects of a desired.
@@ -44,19 +44,19 @@
     <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
         <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
-    </a>
+</a>
 </div>
 
 <section class="esh-event-filters">
     <div class="container">
         <form asp-action="Index" asp-controller="Event" method="post">
-            <label class="esh-event-label" data-title="location">
+            <label class="esh-event-label"  data-title="location" >
                 <select asp-for="@Model.LocationFilterApplied" asp-items="@Model.Locations" class="esh-event-filters"></select>
             </label>
             <label class="esh-event-label" data-title="type">
-                <select asp-for="@Model.TypesFilterApplied" asp-items="@Model.Types"  class="esh-event-filters"></select>
+                <select asp-for="@Model.TypesFilterApplied" asp-items="@Model.Types" class="esh-event-filters"></select>
             </label>
-            <input class="esh-event-send" type="image" src="~/images/arrow-right-1.png" />
+            <input class="esh-event-send" type="image" src="~/images/arrow-right.svg" />
         </form> 
     </div>
 </section>
