@@ -4,7 +4,7 @@
 
 YoTube Link Assignment3b) [https://youtu.be/39CdFIUTVzM]
 
-## This is a service for EventBrite website.
+## This is a service for EventHub website.
 
 ## How to set up the project
 * Clone code
