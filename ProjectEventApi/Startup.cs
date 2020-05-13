@@ -62,6 +62,7 @@ namespace ProjectEventApi
                 {
                     e.SwaggerEndpoint($"/swagger/V1/swagger.json", "ProductEventAPI V1");
                 });
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

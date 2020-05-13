@@ -20,3 +20,5 @@ ProjectEventApi/obj/Debug/netcoreapp3.1/ProjectEventApi.assets.cache
 /WebMvc/obj
 /TokenServiceApi/bin/Debug/netcoreapp2.1
 /TokenServiceApi/obj
+/CartApi/bin/Debug/netcoreapp3.1
+/CartApi/obj

@@ -1,82 +1,122 @@
 version: '3.4'
 
 networks:
-   frontend:
-   backend:
+  frontend:
+  backend:
 
 services:
-   event:
-      image: events/eventapi
-      build:
-         context: .\ProjectEventApi
-         dockerfile: Dockerfile
-      environment:
-         DatabaseServer: mssqlserver
-         DatabaseName: EventDb
-         DatabaseUser: sa
-         DatabasePassword: ProductApi(83)
-         ExternalEventBaseUrl: http://localhost:6900
-      ports: 
-         - "6900:80"
-      container_name: eventseventapi
-      networks:
-         - backend
-         - frontend
-      depends_on:
-         - mssqlserver
+  event:
+    image: events/eventapi
+    build:
+      context: .\ProjectEventApi
+      dockerfile: Dockerfile
+    environment:
+      DatabaseServer: mssqlserver
+      DatabaseName: EventDb
+      DatabaseUser: sa
+      DatabasePassword: ProductApi(83)
+      ExternalEventBaseUrl: http://localhost:6900
+    ports: 
+      - "6900:80"
+    container_name: eventseventapi
+    networks:
+      - backend
+      - frontend
+    depends_on:
+      - mssqlserver
 
-   mssqlserver:
-      image: "microsoft/mssql-server-linux:latest"
-      environment:
-         ACCEPT_EULA: Y
-         SA_PASSWORD: ProductApi(83)
-      ports:
-         - "1449:1433"
-      container_name: eventssqlserver
-      networks:
-         - backend
+  cart:
+    build:
+      context: .\CartApi
+      dockerfile: Dockerfile
+    image: events/cartapi
+    environment:
+      IdentityUrl: http://192.168.1.6:6700
+      ConnectionString: basket.data
+    ports:
+      - "6802:80"
+    container_name: cartapi
+    networks:
+      - backend
+      - frontend
+    depends_on:
+      - basket.data
+      - tokenserver
+      - rabbitmq
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    hostname: myrabbitmq
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+      - "5671:5671"
+    volumes:
+      - ~/rabbitmq:/var/lib/rabbitmq/mnesia   
+    networks:
+      - backend 
+
+  mssqlserver:
+    image: "microsoft/mssql-server-linux:latest"
+    environment:
+      ACCEPT_EULA: Y
+      SA_PASSWORD: ProductApi(83)
+    ports:
+      - "1449:1433"
+    container_name: eventssqlserver
+    networks:
+      - backend
          
-   tokenserver:
-      build:
-        context: .\TokenServiceApi
-        dockerfile: Dockerfile
-      image: events/tokenapi
-      logging:
-        driver: "json-file"
-        options:
-          max-size: "200k"
-          max-file: "10"
-      environment:
-        DatabaseServer: mssqlserver
-        DatabaseName: EventDb
-        DatabaseUser: sa
-        DatabasePassword: ProductApi(83)
-        ASPNETCORE_ENVIRONMENT: Development
-        MvcClient: http://localhost:5310
-      ports:
-        - "6700:80"
-      container_name: tokenserviceapi
-      networks:
-        - backend
-        - frontend
-      depends_on:
-        - mssqlserver
+  tokenserver:
+    build:
+      context: .\TokenServiceApi
+      dockerfile: Dockerfile
+    image: events/tokenapi
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        max-file: "10"
+    environment:
+      DatabaseServer: mssqlserver
+      DatabaseName: EventDb
+      DatabaseUser: sa
+      DatabasePassword: ProductApi(83)
+      ASPNETCORE_ENVIRONMENT: Development
+      MvcClient: http://localhost:5310
+    ports:
+      - "6700:80"
+    container_name: tokenserviceapi
+    networks:
+      - backend
+      - frontend
+    depends_on:
+      - mssqlserver
 
-   webmvc:
-      build:
-        context: .\webmvc
-        dockerfile: Dockerfile
-      image: events/webmvc
-      container_name: eventhub
-      environment:
-        ASPNETCORE_ENVIRONMENT: Development
-        EventUrl: http://event
-        IdentityUrl: http://192.168.1.6:6700
-        CallBackUrl: http://localhost:5310
-      ports:
-        - "5310:80"
-      networks:
-        - frontend
-      depends_on:
-        - event  
+  webmvc:
+    build:
+      context: .\webmvc
+      dockerfile: Dockerfile
+    image: events/webmvc
+    container_name: eventhub
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      EventUrl: http://event
+      IdentityUrl: http://192.168.1.6:6700
+      CallBackUrl: http://localhost:5310
+    ports:
+      - "5310:80"
+    networks:
+      - frontend
+    depends_on:
+      - event  
+
+  basket.data:
+    image: redis
+    container_name: basketdata
+    ports:
+      - "6080:6379"
+    networks:
+      - backend
   
