@@ -32,6 +32,24 @@ namespace WebMVC.Infrastructure
                 return $"{baseUri}EventLocations";
             }
         }
+        public static class Basket
+        {
+            public static string GetBasket(string baseUri, string basketId)
+            {
+                return $"{baseUri}/{basketId}";
+            }
+
+            public static string UpdateBasket(string baseUri)
+            {
+                return baseUri;
+            }
+
+            //Delete basket
+            public static string CleanBasket(string baseUri, string basketId)
+            {
+                return $"{baseUri}/{basketId}";
+            }
+        }
 
     }
 }

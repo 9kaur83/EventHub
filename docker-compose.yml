@@ -31,7 +31,7 @@ services:
       dockerfile: Dockerfile
     image: events/cartapi
     environment:
-      IdentityUrl: http://192.168.1.6:6700
+      IdentityUrl: http://192.168.1.10:6700
       ConnectionString: basket.data
     ports:
       - "6802:80"
@@ -103,14 +103,17 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       EventUrl: http://event
-      IdentityUrl: http://192.168.1.6:6700
+      IdentityUrl: http://192.168.1.10:6700
       CallBackUrl: http://localhost:5310
+      CartUrl: http://cart
     ports:
       - "5310:80"
     networks:
       - frontend
     depends_on:
-      - event  
+      - event 
+      - cart
+      - tokenserver
 
   basket.data:
     image: redis

@@ -16,6 +16,9 @@ using WebMVC.Models;
 using WebMVC.Infrastructure;
 using WebMVC.Services;
 using System.IdentityModel.Tokens.Jwt;
+using WebMvc.Services;
+using WebMvc.Models;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 
 namespace WebMVC
 {
@@ -41,6 +44,8 @@ namespace WebMVC
             services.AddSingleton<IHttpClient, CustomHttpClient>();
             services.AddTransient<IEventService, EventService>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddTransient<IIdentityService<ApplicationUser>, IdentityService>();
+            services.AddTransient<ICartService, CartService>();
             var identityUrl = Configuration.GetValue<string>("IdentityUrl");
             var callBackUrl = Configuration.GetValue<string>("CallBackUrl");
             services.AddAuthentication(options =>
@@ -64,6 +69,7 @@ namespace WebMVC
                 options.Scope.Add("openid");
                 options.Scope.Add("profile");
                 options.Scope.Add("offline_access");
+                options.Scope.Add("basket");
                 options.TokenValidationParameters = new TokenValidationParameters()
                 {
 
