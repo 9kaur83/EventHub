@@ -106,6 +106,9 @@ services:
       IdentityUrl: http://192.168.1.10:6700
       CallBackUrl: http://localhost:5310
       CartUrl: http://cart
+      OrderUrl: http://Order
+      StripePublicKey: pk_test_VVQqoaMxCgt5Z5y4BXVXre6500OYKbjXTw
+      StripePrivateKey: sk_test_i99yLg2OTteV6JqOJGXR9QJ900bsYsFdfp
     ports:
       - "5310:80"
     networks:

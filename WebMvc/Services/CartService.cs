@@ -9,6 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebMvc.Models;
 using WebMvc.Models.CartModels;
+using WebMvc.Models.OrderModels;
 using WebMVC.Infrastructure;
 
 namespace WebMvc.Services
@@ -80,7 +81,7 @@ namespace WebMvc.Services
             return response;
         }
 
-       /* public Order MapCartToOrder(Cart cart)
+        public Order MapCartToOrder(Cart cart)
         {
             var order = new Order();
             order.OrderTotal = 0;
@@ -100,7 +101,7 @@ namespace WebMvc.Services
             });
 
             return order;
-        }*/
+        }
 
 
         public async Task<Cart> SetQuantities(ApplicationUser user, Dictionary<string, int> quantities)
