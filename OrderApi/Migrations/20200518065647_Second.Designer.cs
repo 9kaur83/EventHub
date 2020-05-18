@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using OderApi.Data;
+using orderApi.Data;
 
-namespace OderApi.Migrations
+namespace orderApi.Migrations
 {
     [DbContext(typeof(OrdersContext))]
-    partial class OrdersContextModelSnapshot : ModelSnapshot
+    [Migration("20200518065647_Second")]
+    partial class Second
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -19,7 +21,7 @@ namespace OderApi.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("OderApi.Models.Order", b =>
+            modelBuilder.Entity("orderApi.Models.Order", b =>
                 {
                     b.Property<int>("OrderId")
                         .ValueGeneratedOnAdd()
@@ -58,7 +60,7 @@ namespace OderApi.Migrations
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("OderApi.Models.OrderItem", b =>
+            modelBuilder.Entity("orderApi.Models.OrderItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -90,9 +92,9 @@ namespace OderApi.Migrations
                     b.ToTable("OrderItems");
                 });
 
-            modelBuilder.Entity("OderApi.Models.OrderItem", b =>
+            modelBuilder.Entity("orderApi.Models.OrderItem", b =>
                 {
-                    b.HasOne("OderApi.Models.Order", "Order")
+                    b.HasOne("orderApi.Models.Order", "Order")
                         .WithMany("OrderItems")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)

@@ -44,6 +44,34 @@ services:
       - tokenserver
       - rabbitmq
 
+  order:
+    build:
+      context: .\OrderApi
+      dockerfile: Dockerfile
+    image: events/orderapi 
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        max-file: "10"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      IdentityUrl: http://192.168.1.10:6700
+      DatabaseServer: mssqlserver
+      DatabaseName: EventDb
+      DatabaseUser: sa
+      DatabasePassword: ProductApi(83)
+    ports:
+      - "6801:80"
+    container_name: orderapi
+    networks:
+      - backend
+      - frontend
+    depends_on:
+      - mssqlserver
+      - tokenserver
+      - rabbitmq
+
   rabbitmq:
     image: rabbitmq:3-management
     container_name: rabbitmq
@@ -116,6 +144,7 @@ services:
     depends_on:
       - event 
       - cart
+      - order
       - tokenserver
 
   basket.data:

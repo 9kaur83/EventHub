@@ -24,3 +24,5 @@ ProjectEventApi/obj/Debug/netcoreapp3.1/ProjectEventApi.assets.cache
 /CartApi/obj
 /OderApi/bin/Debug/netcoreapp3.1
 /OderApi/obj
+/OrderApi/bin/Debug/netcoreapp3.1
+/OrderApi/obj

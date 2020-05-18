@@ -5,15 +5,15 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using OderApi.Data;
-using OderApi.Models;
+using orderApi.Data;
+using orderApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace OderApi.Controllers
+namespace orderApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

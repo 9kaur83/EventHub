@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OderApi.Infrastructure.Exceptions
+namespace orderApi.Infrastructure.Exceptions
 {
     public class OrderingDomainException : Exception
     {

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 
-namespace OderApi.Data
+namespace orderApi.Data
 {
     public static class MigrateDatabase
     {

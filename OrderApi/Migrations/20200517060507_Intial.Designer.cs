@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using OderApi.Data;
+using orderApi.Data;
 
-namespace OderApi.Migrations
+namespace orderApi.Migrations
 {
     [DbContext(typeof(OrdersContext))]
     [Migration("20200517060507_Intial")]
@@ -21,7 +21,7 @@ namespace OderApi.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("OderApi.Models.Order", b =>
+            modelBuilder.Entity("orderApi.Models.Order", b =>
                 {
                     b.Property<int>("OrderId")
                         .ValueGeneratedOnAdd()
@@ -60,7 +60,7 @@ namespace OderApi.Migrations
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("OderApi.Models.OrderItem", b =>
+            modelBuilder.Entity("orderApi.Models.OrderItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -92,9 +92,9 @@ namespace OderApi.Migrations
                     b.ToTable("OrderItems");
                 });
 
-            modelBuilder.Entity("OderApi.Models.OrderItem", b =>
+            modelBuilder.Entity("orderApi.Models.OrderItem", b =>
                 {
-                    b.HasOne("OderApi.Models.Order", "Order")
+                    b.HasOne("orderApi.Models.Order", "Order")
                         .WithMany("OrderItems")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)

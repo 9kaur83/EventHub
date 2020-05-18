@@ -15,10 +15,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using OderApi.Data;
+using orderApi.Data;
 using RabbitMQ.Client;
 
-namespace OderApi
+namespace orderApi
 {
     public class Startup
     {

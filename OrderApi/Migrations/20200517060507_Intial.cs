@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace OderApi.Migrations
+namespace orderApi.Migrations
 {
     public partial class Intial : Migration
     {

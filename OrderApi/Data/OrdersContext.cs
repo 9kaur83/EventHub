@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using OderApi.Models;
+using orderApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OderApi.Data
+namespace orderApi.Data
 {
     public class OrdersContext : DbContext
     {

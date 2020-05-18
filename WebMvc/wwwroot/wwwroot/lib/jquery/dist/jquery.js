@@ -3682,7 +3682,7 @@ Data.prototype = {
 	},
 	cache: function( owner ) {
 
-		// We can accept data for non-element nodes in modern browsers,
+		// We can accept data for non-element nodes in mordern browsers,
 		// but we should not, see #8335.
 		// Always return an empty object.
 		if ( !acceptData( owner ) ) {
@@ -3696,7 +3696,7 @@ Data.prototype = {
 		if ( !value ) {
 			value = {};
 
-			// We can accept data for non-element nodes in modern browsers,
+			// We can accept data for non-element nodes in mordern browsers,
 			// but we should not, see #8335.
 			// Always return an empty object.
 			if ( acceptData( owner ) ) {
