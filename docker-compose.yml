@@ -30,7 +30,13 @@ services:
       context: .\CartApi
       dockerfile: Dockerfile
     image: events/cartapi
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        max-file: "10"
     environment:
+      ASPNETCORE_ENVIRONMENT: Development
       IdentityUrl: http://192.168.1.10:6700
       ConnectionString: basket.data
     ports:
@@ -107,12 +113,9 @@ services:
         max-size: "200k"
         max-file: "10"
     environment:
-      DatabaseServer: mssqlserver
-      DatabaseName: EventDb
-      DatabaseUser: sa
-      DatabasePassword: ProductApi(83)
       ASPNETCORE_ENVIRONMENT: Development
       MvcClient: http://localhost:5310
+      BasketApiClient: https://localhost:6801
     ports:
       - "6700:80"
     container_name: tokenserviceapi
@@ -134,7 +137,7 @@ services:
       IdentityUrl: http://192.168.1.10:6700
       CallBackUrl: http://localhost:5310
       CartUrl: http://cart
-      OrderUrl: http://Order
+      OrderUrl: http://order
       StripePublicKey: pk_test_VVQqoaMxCgt5Z5y4BXVXre6500OYKbjXTw
       StripePrivateKey: sk_test_i99yLg2OTteV6JqOJGXR9QJ900bsYsFdfp
     ports:

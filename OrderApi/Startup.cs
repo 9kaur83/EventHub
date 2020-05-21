@@ -47,7 +47,7 @@ namespace orderApi
                 //options.DescribeAllEnumsAsStrings();
                 options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
                 {
-                    Title = "JewelsonContainers - Order API",
+                    Title = "EventHub - Order API",
                     Version = "v1",
                     Description = "Order service API"
                 });
@@ -123,8 +123,14 @@ namespace orderApi
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
+            app.UseSwagger()
+                .UseSwaggerUI(e =>
+                {
+                    e.SwaggerEndpoint("/swagger/v1/swagger.json", "OrderAPI V1");
+                });
+
 
             app.UseEndpoints(endpoints =>
             {

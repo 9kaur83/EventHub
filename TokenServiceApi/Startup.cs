@@ -36,15 +36,9 @@ namespace TokenServiceApi
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            var server = Configuration["DatabaseServer"];
-            var database = Configuration["DatabaseName"];
-            var user = Configuration["DatabaseUser"];
-            var password = Configuration["DatabasePassword"];
-            var connectionString = $"Server={server};Database={database};User Id={user};Password={password}";
-
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(connectionString));
-            //line number 43 to 45 define its aidentity server
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection")));
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();

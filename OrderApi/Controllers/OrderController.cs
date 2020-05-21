@@ -1,4 +1,5 @@
-﻿using MassTransit;
+﻿using common.Messaging;
+using MassTransit;
 using Microsoft.AspNetCore.Authorization;
 //using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc;
@@ -66,7 +67,7 @@ namespace orderApi.Controllers
             {
                 await _ordersContext.SaveChangesAsync();
                 _logger.LogWarning("BuyerId is: " + order.BuyerId);
-                //_bus.Publish(new OrderCompletedEvent(order.BuyerId)).Wait();
+                _bus.Publish(new OrderCompletedEvent(order.BuyerId)).Wait();
                 return Ok(new { order.OrderId });
             }
             catch (DbUpdateException ex)
