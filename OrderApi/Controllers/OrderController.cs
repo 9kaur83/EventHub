@@ -1,4 +1,4 @@
-﻿using common.Messaging;
+﻿using Common.Messaging;
 using MassTransit;
 using Microsoft.AspNetCore.Authorization;
 //using Microsoft.AspNetCore.Components;

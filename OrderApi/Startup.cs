@@ -63,7 +63,8 @@ namespace orderApi
                             TokenUrl = new Uri($"{Configuration["IdentityUrl"]}/connect/token"),
                             Scopes = new Dictionary<string, string>
                             {
-                                {"order", "Order Api" }
+                                {"order", "Order Api" },
+                                {"basket", "Basket Api"}
                             }
                         }
                     }
@@ -108,6 +109,7 @@ namespace orderApi
                     options.Authority = identityUrl;
                     options.RequireHttpsMetadata = false;
                     options.Audience = "order";
+                    options.Audience = "basket";
                 });
             }
     }
