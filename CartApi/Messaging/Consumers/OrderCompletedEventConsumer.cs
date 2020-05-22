@@ -1,4 +1,5 @@
 ﻿using CartApi.Models;
+using Common.Messaging;
 using MassTransit;
 using Microsoft.Extensions.Logging;
 using System;
