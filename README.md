@@ -1,8 +1,8 @@
 # EventHub
- Assignment3b)
+ Assignment3c)
 
 
-YoTube Link Assignment3b) [https://youtu.be/39CdFIUTVzM]
+YoTube Link Assignment3c) [https://youtu.be/EunXfA1-1x4]
 
 ## This is a service for EventHub website.
 
@@ -12,7 +12,11 @@ YoTube Link Assignment3b) [https://youtu.be/39CdFIUTVzM]
 * Start without Debugging
 * Build a MVC client
 * Add TokenService Microservice
+* Add Cart services
+* Add Order services
 * Integrate with the client
+* Integrate with the front end
+* Dockerize
 
 
 ## What you can do with this EventHub
@@ -29,6 +33,8 @@ YoTube Link Assignment3b) [https://youtu.be/39CdFIUTVzM]
 * Building API
 * Building WebMVC
 * Building CartApi
+* Building OrderApi
+* Building TokenApi 
 
 
 
